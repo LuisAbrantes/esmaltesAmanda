@@ -1,0 +1,12 @@
+-- Referencia inicial para as opcoes padrao da v1.
+-- Como color_family, tone e finish usam check constraints na tabela `polishes`,
+-- a fonte de verdade da v1 continua sendo o proprio schema.
+--
+-- Families:
+-- vermelho, rosa, nude, azul, verde, preto, branco, roxo, prata, dourado, multicolorido
+--
+-- Tone:
+-- claro, medio, escuro
+--
+-- Finish:
+-- cremoso, cintilante, glitter, transparente, metalico
