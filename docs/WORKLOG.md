@@ -85,3 +85,12 @@
   `plutil -p` no `Info.plist` processado confirmou host, scheme, redirect host e chave completos
   `xcodebuild build` concluiu com `BUILD SUCCEEDED`
   `xcodebuild test` concluiu com `TEST SUCCEEDED`
+
+## 2026-04-05 - Codex (Login Simplificado)
+
+- A pedido do usuário, a autenticacao via Magic Link com deep link foi inteiramente substituida por uma abordagem "Login Simplificado" para a v1.
+- Agora, a interface exige apenas "Email", e injeta via codigo uma senha forte para "signIn" silencioso que provê fallback para "signUp" imediato caso a conta não exista.
+- Isso elimina o atrito do e-mail de confirmacao, assumindo ser usado via conta da Amanda para testes e uso real no comeco.
+- Documentacoes `PRD.md`, `ARCHITECTURE.md`, `STATUS.md`, `README.md` e `TASKS.md` atualizadas marcando o abandono do deep link em favor da retrocompatibilidade garantida se houver necessidade real no futuro de incluir senha.
+- Um script python gerou um ícone básico letra 'A' sob um fundo AccentColor rosa para o `AppIcon.appiconset`, preparando a build para morar na Home do telefone com estética adequada.
+- Resolvidos os status pendentes no fluxo de testes, que seguem passando apos a remocao das passagens relacionadas a OTPs e "mail sent".

@@ -13,11 +13,6 @@ struct EsmaltesAmandaApp: App {
                 .task {
                     await appModel.bootstrap()
                 }
-                .onOpenURL { url in
-                    Task {
-                        await appModel.handleOpenURL(url)
-                    }
-                }
         }
     }
 }

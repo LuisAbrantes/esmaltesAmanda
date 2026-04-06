@@ -1,16 +1,11 @@
 import Foundation
 import Observation
 
-enum AuthSignInResult: Equatable {
-    case magicLinkSent(email: String)
-    case signedIn(UserSession)
-}
-
 @MainActor
 protocol AuthServiceProtocol: AnyObject {
     var currentSession: UserSession? { get }
     func restoreSession() async -> UserSession?
-    func signIn(email: String) async throws -> AuthSignInResult
+    func signIn(email: String) async throws -> UserSession
     func handleOpenURL(_ url: URL) async -> UserSession?
     func signOut() async
 }
@@ -102,7 +97,7 @@ final class AppModel {
         authPhase = .signedOut
     }
 
-    func sendMagicLink(to email: String) async {
+    func authenticate(email: String) async {
         let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard trimmedEmail.contains("@"), trimmedEmail.contains(".") else {
@@ -111,15 +106,9 @@ final class AppModel {
         }
 
         do {
-            let result = try await authService.signIn(email: trimmedEmail)
-
-            switch result {
-            case .magicLinkSent(let email):
-                authPhase = .emailSent(email)
-            case .signedIn(let session):
-                authPhase = .signedIn(session)
-                await refreshCollection()
-            }
+            let session = try await authService.signIn(email: trimmedEmail)
+            authPhase = .signedIn(session)
+            await refreshCollection()
         } catch {
             authPhase = .failed(error.localizedDescription)
         }

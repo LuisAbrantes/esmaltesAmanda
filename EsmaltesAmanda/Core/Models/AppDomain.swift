@@ -237,7 +237,6 @@ extension Array where Element == Polish {
 enum AuthPhase: Equatable {
     case checking
     case signedOut
-    case emailSent(String)
     case signedIn(UserSession)
     case failed(String)
 }

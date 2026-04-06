@@ -72,7 +72,7 @@ final class DemoAuthService: AuthServiceProtocol {
         currentSession
     }
 
-    func signIn(email: String) async throws -> AuthSignInResult {
+    func signIn(email: String) async throws -> UserSession {
         let profile = UserProfile(
             id: PreviewFixtures.primaryUser.id,
             email: email,
@@ -85,7 +85,7 @@ final class DemoAuthService: AuthServiceProtocol {
 
         let session = UserSession(user: profile)
         currentSession = session
-        return .signedIn(session)
+        return session
     }
 
     func handleOpenURL(_ url: URL) async -> UserSession? {

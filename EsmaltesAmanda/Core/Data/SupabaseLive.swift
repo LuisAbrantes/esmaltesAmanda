@@ -58,27 +58,38 @@ final class SupabaseAuthService: AuthServiceProtocol {
         }
     }
 
-    func signIn(email: String) async throws -> AuthSignInResult {
-        try await client.auth.signInWithOTP(
-            email: email,
-            redirectTo: URL(string: configuration.redirectURL)!
-        )
-
-        return .magicLinkSent(email: email)
+    func signIn(email: String) async throws -> UserSession {
+        // Fallback robusto de email + senha apenas para v1 (sem verificacao de email real).
+        let hardcodedPassword = "DefaultAppPassword2026!"
+        
+        do {
+            let result = try await client.auth.signIn(email: email, password: hardcodedPassword)
+            return try await makeUserSession(
+                userID: result.user.id,
+                email: result.user.email ?? email
+            )
+        } catch {
+            // Se falhou, provavelmente a conta ainda nao existe, entao fazemos sign up
+            let result = try await client.auth.signUp(email: email, password: hardcodedPassword)
+            
+            // Depois do Sign Up no Supabase com "Confirm email" desativado, 
+            // a sessao ja vem ativa em result.session (se retornado).
+            // Caso contrario, forcamos o signIn logo em seguida.
+            if result.session == nil {
+                _ = try await client.auth.signIn(email: email, password: hardcodedPassword)
+            }
+            
+            let userResult = try await client.auth.session
+            return try await makeUserSession(
+                userID: userResult.user.id,
+                email: userResult.user.email ?? email
+            )
+        }
     }
 
     func handleOpenURL(_ url: URL) async -> UserSession? {
-        do {
-            let session = try await client.auth.session(from: url)
-            let mapped = try await makeUserSession(
-                userID: session.user.id,
-                email: session.user.email ?? ""
-            )
-            currentSession = mapped
-            return mapped
-        } catch {
-            return nil
-        }
+        // Magic link nao e mais suportado na v1
+        return nil
     }
 
     func signOut() async {

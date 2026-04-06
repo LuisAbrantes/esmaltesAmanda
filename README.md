@@ -23,10 +23,9 @@ Aplicativo iOS em `SwiftUI` para organizar a colecao de esmaltes da Amanda com b
 ## Backend Supabase
 
 1. Criar um projeto no Supabase
-2. Habilitar Auth por email magic link
-3. Adicionar `esmaltesamanda://login-callback` nas Redirect URLs do Auth
-4. Aplicar a migration [20260405160000_initial_schema.sql](/Users/luisabrantes/Documents/Code/esmaltesAmanda/supabase/migrations/20260405160000_initial_schema.sql)
-5. Revisar as politicas de storage do bucket `polish-photos`
+2. Habilitar Auth por Email no Provider. Desabilite "Confirm email" para viabilizar conta silenciosa (usada na v1).
+3. Aplicar a migration [20260405160000_initial_schema.sql](/Users/luisabrantes/Documents/Code/esmaltesAmanda/supabase/migrations/20260405160000_initial_schema.sql)
+4. Revisar as politicas de storage do bucket `polish-photos`
 
 ## Convencoes
 

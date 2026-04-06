@@ -19,8 +19,8 @@ App iOS para catalogar esmaltes de forma pessoal, visual e facil de consultar. O
 
 ## Escopo v1
 
-- Login por email magic link
-- Onboarding simples
+- Login/Cadastro unificados apenas com email (sem senha exposta na UI para maxima praticidade, mantendo uma senha forte oculta em codigo local).
+- Onboarding direto
 - Lista da colecao com busca e filtros
 - Cadastro e edicao de esmalte
 - Foto principal por esmalte
@@ -52,4 +52,3 @@ App iOS para catalogar esmaltes de forma pessoal, visual e facil de consultar. O
 - Emprestimos entre amigas
 - Notificacoes e lembretes
 - Importacao por foto/IA
-

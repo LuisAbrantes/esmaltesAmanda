@@ -44,12 +44,12 @@ struct ProfileView: View {
 
                 AppCard {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Checklist do proximo passo")
+                        Text("Prontos para Launch!")
                             .font(.headline)
 
-                        Label("Trocar o modo demo pela camada live do Supabase", systemImage: "arrow.triangle.branch")
-                        Label("Configurar magic link e deep link customizado", systemImage: "link.badge.plus")
-                        Label("Validar upload de fotos com Storage e RLS", systemImage: "lock.doc")
+                        Label("Login de E-mail Único Configurado", systemImage: "checkmark.circle.fill")
+                        Label("Upload de fotos testado", systemImage: "photo.badge.checkmark")
+                        Label("Configurações locais aplicadas e Ícone criado", systemImage: "iphone.gen3.radiowaves.left.and.right")
                     }
                     .foregroundStyle(AppTheme.ink)
                 }

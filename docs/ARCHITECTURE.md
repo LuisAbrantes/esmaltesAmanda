@@ -7,7 +7,7 @@
 - `TabView` com `NavigationStack` por aba
 - Backend em `Supabase`
 - Fotos em `Supabase Storage`
-- Auth por email magic link
+- Auth de Acesso via E-mail Direto (com senha pre-definida)
 
 ## Modulos
 
@@ -26,10 +26,11 @@
 
 1. App sobe e tenta restaurar sessao
 2. Sem sessao, entra em `signedOut`
-3. Login por magic link com Supabase Auth
-4. O app trata o deep link `esmaltesamanda://login-callback` e tenta restaurar a sessao
-5. Com sessao ativa, a usuaria carrega apenas seus registros
-6. Logout limpa sessao e estado local
+3. Login ou Criacao de conta integrados na mesma interface.
+4. A tela de Acesso usa Email e uma senha pre-definida `DefaultAppPassword2026!` (hardcoded). O app tenta fazer Sign In, e se falhar (ex.: email nao existe), ele tenta fazer Sign Up. A intencao e ocultar a senha para a usuaria final, provendo acesso invisivel.
+5. Com sessao ativa, a usuaria carrega apenas seus registros. O deep link/magic link foi removido por extrema simplificacao.
+
+> **Extensibilidade**: Como o registro no Supabase usa as APIs nativas atrelando o User ao UUID normal em `auth.users`, adicionar suporte a senhas reais no futuro mantem retrocompatibilidade total. Bastara adicionar o campo `Password` na UI, remover a senha fixa e solicitar confirmacao por email.
 
 ## Fluxo de dados
 

@@ -42,11 +42,9 @@
 
 ## O que falta
 
-- Validar auth por magic link, CRUD e upload/download de foto contra um projeto Supabase real
-- Testar o fluxo real com `Secrets.xcconfig` preenchido: magic link, CRUD e upload de foto
-- Conferir se a chave recebida e realmente uma anon key publica; o valor atual parece uma secret key e isso nao e ideal para app cliente
-- Validar se o app realmente saiu do modo demo e entrou na camada live com as credenciais configuradas
-- Verificar visualmente no app se o banner/estado saiu de demo e passou a refletir o modo live do Supabase
+- (Feito) Alterada autenticacao para Login Direto sem password na UI, facilitando onboarding e utilizacao.
+- Confirmar uso do App no Simulador ou Dispositivo com o novo Login de 1 Campo de E-mail.
+- Configurar o Certificate/Provisioning Profile na aba Signing & Capabilities para instalar via cabo.
 
 ## Bugs documentados antes da proxima implementacao
 

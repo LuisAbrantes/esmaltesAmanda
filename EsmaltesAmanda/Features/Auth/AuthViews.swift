@@ -18,7 +18,7 @@ struct AuthGateView: View {
             case .signedIn:
                 appShell
 
-            case .signedOut, .emailSent, .failed:
+            case .signedOut, .failed:
                 LoginView()
             }
         }
@@ -85,17 +85,9 @@ struct LoginView: View {
                         systemImage: "shippingbox"
                     )
 
-                    if case .emailSent(let sentEmail) = appModel.authPhase {
-                        AppBanner(
-                            title: "Magic link enviado",
-                            message: "No fluxo real do Supabase, o link seguiria para \(sentEmail). No modo atual, a base esta estruturada e o app continua com dados demo para acelerar a construcao.",
-                            systemImage: "envelope.badge"
-                        )
-                    }
-
                     if case .failed(let message) = appModel.authPhase {
                         AppBanner(
-                            title: "Nao foi possivel continuar",
+                            title: "Não foi possível continuar",
                             message: message,
                             systemImage: "exclamationmark.triangle"
                         )
@@ -103,10 +95,10 @@ struct LoginView: View {
 
                     AppCard {
                         VStack(alignment: .leading, spacing: 16) {
-                            Text("Entrar")
+                            Text("Acesso")
                                 .font(.title3.weight(.bold))
 
-                            TextField("Email", text: $email)
+                            TextField("E-mail", text: $email)
                                 .textInputAutocapitalization(.never)
                                 .keyboardType(.emailAddress)
                                 .autocorrectionDisabled()
@@ -116,7 +108,7 @@ struct LoginView: View {
                             Button {
                                 Task {
                                     isSending = true
-                                    await appModel.sendMagicLink(to: email)
+                                    await appModel.authenticate(email: email)
                                     isSending = false
                                 }
                             } label: {
@@ -126,7 +118,7 @@ struct LoginView: View {
                                             .tint(.white)
                                     }
 
-                                    Text("Enviar magic link")
+                                    Text("Entrar")
                                 }
                                 .frame(maxWidth: .infinity)
                             }
