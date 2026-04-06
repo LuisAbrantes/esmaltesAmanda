@@ -6,22 +6,22 @@ Aplicativo React Native com Expo para organizar a coleção de esmaltes da Amand
 
 1. Instale as dependências:
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 2. Crie um arquivo `.env` na raiz com:
 
-   ```bash
-   EXPO_PUBLIC_SUPABASE_URL=...
-   EXPO_PUBLIC_SUPABASE_ANON_KEY=...
-   ```
+    ```bash
+    EXPO_PUBLIC_SUPABASE_URL=...
+    EXPO_PUBLIC_SUPABASE_ANON_KEY=...
+    ```
 
 3. Inicie o app:
 
-   ```bash
-   npx expo start
-   ```
+    ```bash
+    npx expo start
+    ```
 
 4. Abra no celular com o app Expo Go ou emulador/simulador.
 
