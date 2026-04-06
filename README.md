@@ -1,42 +1,39 @@
 # Esmaltes Amanda
 
-Aplicativo iOS em `SwiftUI` para organizar a colecao de esmaltes da Amanda com base pronta para evoluir para multiplas usuarias. O projeto nasce com shell moderno de iOS, documentacao de handoff entre IAs e backend planejado em Supabase com auth, RLS e storage.
+Aplicativo React Native com Expo para organizar a coleção de esmaltes da Amanda. O banco e as regras de acesso continuam no Supabase, com login direto por e-mail na v1.
 
-## O que ja existe
+## Como rodar
 
-- Projeto iOS base em `SwiftUI`, alvo `iOS 17+`
-- Fluxo de autenticacao inicial
-- Catalogo com busca, filtros, detalhe, cadastro e perfil
-- Estrutura de backend em `supabase/migrations`
-- Documentacao operacional em `docs/`
-- Testes iniciais para filtros e repositório em memoria
+1. Instale as dependências:
 
-## Como abrir
+   ```bash
+   npm install
+   ```
 
-1. Duplicar `Config/Secrets.template.xcconfig` para `Config/Secrets.xcconfig`
-2. Preencher `SUPABASE_URL`, `SUPABASE_ANON_KEY` e `SUPABASE_REDIRECT_URL`
-3. Garantir que o Xcode resolva o package `https://github.com/supabase/supabase-swift.git`
-4. Abrir [EsmaltesAmanda.xcodeproj](/Users/luisabrantes/Documents/Code/esmaltesAmanda/EsmaltesAmanda.xcodeproj)
-5. Selecionar um simulador de iPhone com iOS 17 ou superior
-6. Rodar o scheme `EsmaltesAmanda`
+2. Crie um arquivo `.env` na raiz com:
 
-## Backend Supabase
+   ```bash
+   EXPO_PUBLIC_SUPABASE_URL=...
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=...
+   ```
 
-1. Criar um projeto no Supabase
-2. Habilitar Auth por Email no Provider. Desabilite "Confirm email" para viabilizar conta silenciosa (usada na v1).
-3. Aplicar a migration [20260405160000_initial_schema.sql](/Users/luisabrantes/Documents/Code/esmaltesAmanda/supabase/migrations/20260405160000_initial_schema.sql)
-4. Revisar as politicas de storage do bucket `polish-photos`
+3. Inicie o app:
 
-## Convencoes
+   ```bash
+   npx expo start
+   ```
 
-- Toda sessao deve ler `docs/PRD.md`, `docs/TASKS.md` e `docs/STATUS.md`
-- Toda sessao deve atualizar `docs/WORKLOG.md` e `docs/STATUS.md`
-- Se mudar fluxo, schema ou arquitetura, registrar tambem em `docs/ARCHITECTURE.md`
+4. Abra no celular com o app Expo Go ou emulador/simulador.
 
-## Estrutura
+## Supabase
 
-- `EsmaltesAmanda/`: app iOS
-- `EsmaltesAmandaTests/`: testes unitarios
-- `Config/`: configuracao de build e segredos locais
-- `supabase/`: schema, policies e material de backend
-- `docs/`: PRD, arquitetura, backlog e handoff
+1. A migration principal segue em [supabase/migrations/20260405160000_initial_schema.sql](supabase/migrations/20260405160000_initial_schema.sql).
+2. No dashboard do Supabase, desative a confirmação por e-mail em Authentication > Providers > Email.
+3. Confirme também se o bucket `polish-photos` foi criado pela migration.
+
+## Estrutura atual
+
+- `app/`: rotas e telas do Expo Router
+- `src/`: cliente Supabase e providers de estado
+- `supabase/`: schema, RLS e storage
+- `docs/`: arquitetura, backlog e status

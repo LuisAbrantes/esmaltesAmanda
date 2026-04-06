@@ -94,3 +94,11 @@
 - Documentacoes `PRD.md`, `ARCHITECTURE.md`, `STATUS.md`, `README.md` e `TASKS.md` atualizadas marcando o abandono do deep link em favor da retrocompatibilidade garantida se houver necessidade real no futuro de incluir senha.
 - Um script python gerou um ícone básico letra 'A' sob um fundo AccentColor rosa para o `AppIcon.appiconset`, preparando a build para morar na Home do telefone com estética adequada.
 - Resolvidos os status pendentes no fluxo de testes, que seguem passando apos a remocao das passagens relacionadas a OTPs e "mail sent".
+
+## 2026-04-05 - Codex (React Native Transition)
+
+- Todo codebase iOS/Swift native jogado fora, abrindo o caminho para Expo. Em decorrência do baixo atrito para deploy web/lan local via Expo Go.
+- `temp-app` instanciado com Typecript Tabs no lugar das pastas SwiftUI e `.xcodeproj`.
+- `react-native-url-polyfill`, `@react-native-async-storage/async-storage` e `@supabase/supabase-js` instalados e configurados na raiz do novo source (`src/lib/supabase.ts`) usando as variables de ambiente Expo (`EXPO_PUBLIC_`).
+- Os docs (`ARCHITECTURE.md` e `README.md`) receberam refactor para apagar fluxos em Obj-C/SwiftUI e contemplar React Context, `AsyncStorage` e `app/` file-based routing.
+- O Supabase (`/supabase/migrations`) e negócio da aplicação seguem os mesmos inalteráveis, preservando a identidade da documentação construida até aqui.
